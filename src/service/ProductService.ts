@@ -16,15 +16,15 @@ export class LivroService{
         return novoLivro;
     }
 
-    async atualizarProduto(produtoData: any): Promise<Product> {
-        const { id, name, price } = produtoData;
-        if(!name || !price || !id ){
+    async atualizarLivro(livroData: any): Promise<Livro> {
+        const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
+        if(!title || !author || !publishedDate || !isbn || !pages || !language || !publisher ){
             throw new Error("Informações incompletas");
         }
 
-        const produto =  await this.productRepository.updateProduct(id,name, price);
-        console.log("Service - Update ", produto);
-        return produto;
+        const livro =  await this.livroRepository.updateLivro(id,title, author, publishedDate, isbn, pages, language, publisher);
+        console.log("Service - Update ", livro);
+        return livro;
     }
 
     async deletarProduto(produtoData: any): Promise<Product> {
