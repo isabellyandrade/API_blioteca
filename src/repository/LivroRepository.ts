@@ -76,31 +76,45 @@ export class LivroRepository{
         }
     }
 
-    async filterProduct(id: number) :Promise<Product>{
-        const query = "SELECT * FROM vendas.product where id = ?" ;
+    async filterLivroById(id: number) :Promise<Livro>{
+        const query = "SELECT * FROM Novo.Livro where id = ?" ;
 
         try {
             const resultado = await executarComandoSQL(query, [id]);
-            console.log('Produto localizado com sucesso, ID: ', resultado);
-            return new Promise<Product>((resolve)=>{
+            console.log('Livro localizado com sucesso, ID: ', resultado);
+            return new Promise<Livro>((resolve)=>{
                 resolve(resultado);
             })
         } catch (err:any) {
-            console.error(`Falha ao procurar o produto de ID ${id} gerando o erro: ${err}`);
+            console.error(`Falha ao procurar o livro de ID ${id} gerando o erro: ${err}`);
             throw err;
         }
     }
 
-    async filterAllProduct() :Promise<Product[]>{
-        const query = "SELECT * FROM vendas.product" ;
+    async filterLivroByISBN(isbn: number) :Promise<Livro>{
+        const query = "SELECT * FROM Novo.Livro where isbn = ?" ;
 
         try {
-            const resultado = await executarComandoSQL(query, []);
-            return new Promise<Product[]>((resolve)=>{
+            const resultado = await executarComandoSQL(query, [isbn]);
+            console.log('Livro localizado com sucesso, Isbn: ', resultado);
+            return new Promise<Livro>((resolve)=>{
                 resolve(resultado);
             })
         } catch (err:any) {
-            console.error(`Falha ao listar os produtos gerando o erro: ${err}`);
+            console.error(`Falha ao procurar o livro de ID ${isbn} gerando o erro: ${err}`);
+            throw err;
+        }
+    }
+    async filterAllLivro() :Promise<Livro[]>{
+        const query = "SELECT * FROM Novo.Livro" ;
+
+        try {
+            const resultado = await executarComandoSQL(query, []);
+            return new Promise<Livro[]>((resolve)=>{
+                resolve(resultado);
+            })
+        } catch (err:any) {
+            console.error(`Falha ao listar os livros gerando o erro: ${err}`);
             throw err;
         }
     }
