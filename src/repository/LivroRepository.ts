@@ -60,18 +60,18 @@ export class LivroRepository{
         }
     }
 
-    async deleteProduct(id: number, name:string, price:number) :Promise<Product>{
-        const query = "DELETE FROM vendas.product where id = ?;" ;
+    async deleteLivro(id: number, title: string, author:string, publishedDate:string, isbn:string, pages: number, language:string, publisher:string) :Promise<Livro>{
+        const query = "DELETE FROM Novo.Livro where id = ?;" ;
 
         try {
             const resultado = await executarComandoSQL(query, [id]);
-            console.log('Produto deletado com sucesso, ID: ', resultado);
-            const product = new Product(id, name, price);
-            return new Promise<Product>((resolve)=>{
-                resolve(product);
+            console.log('Livro deletado com sucesso, ID: ', resultado);
+            const livro = new Livro(id, title, author, publishedDate, isbn, pages, language, publisher);
+            return new Promise<Livro>((resolve)=>{
+                resolve(livro);
             })
         } catch (err:any) {
-            console.error(`Falha ao deletar o produto de ID ${id} gerando o erro: ${err}`);
+            console.error(`Falha ao deletar o livro de ID ${id} gerando o erro: ${err}`);
             throw err;
         }
     }
