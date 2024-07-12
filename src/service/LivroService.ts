@@ -11,7 +11,9 @@ export class LivroService{
             throw new Error("Informações incompletas");
         }
         const cadastro = await this.livroRepository.filterLivroByISBN(isbn);
-        if()
+        if(){
+            
+        }
 
         const novoLivro =  await this.livroRepository.insertLivro(title, author, publishedDate, isbn, pages, language, publisher);
         console.log("Service - Insert ", novoLivro);

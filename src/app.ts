@@ -1,5 +1,5 @@
 import express from 'express';
-import { cadastrarProduto, atualizarProduto, deletarProduto, filtrarProduto, listarTodosProduto } from './controller/ProductController';
+import { cadastrarProduto, atualizarProduto, deletarProduto, filtrarProduto, listarTodosProduto } from './controller/LivroController';
 
 const app = express();
 
