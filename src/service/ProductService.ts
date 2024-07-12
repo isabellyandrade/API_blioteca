@@ -1,5 +1,5 @@
 import { Product } from "../model/Livro";
-import { ProductRepository } from "../repository/ProductRepository";
+import { ProductRepository } from "../repository/LivroRepository";
 
 export class ProductService{
 

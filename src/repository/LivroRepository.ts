@@ -1,7 +1,7 @@
 import { executarComandoSQL } from "../database/mysql";
-import { Product } from "../model/Livro";
+import { Livro } from "../model/Livro";
 
-export class ProductRepository{
+export class LivroRepository{
 
     constructor(){
         this.createTable();
@@ -9,10 +9,15 @@ export class ProductRepository{
 
     private async createTable() {
         const query = `
-        CREATE TABLE IF NOT EXISTS Vendas.Product (
+        CREATE TABLE IF NOT EXISTS Novo.Livro (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            price DECIMAL(10,2) NOT NULL
+            title VARCHAR(255) NOT NULL,
+            author VARCHAR(255) NOT NULL,
+            publishedDate VARCHAR(255) NOT NULL,
+            isbn VARCHAR(255) NOT NULL,
+            pages INT NOT NULL.
+            language VARCHAR(255) NOT NULL,
+            publisher VARCHAR(255) NOT NULL
         )`;
 
         try {
@@ -23,18 +28,18 @@ export class ProductRepository{
         }
     }
 
-    async insertProduct(name: string, price: number) :Promise<Product>{
-        const query = "INSERT INTO vendas.Product (name, price) VALUES (?, ?)" ;
+    async insertLivro(title: string, author:string, publishedDate:string, isbn:string, pages: number, language:string, publisher:string) :Promise<Livro>{
+        const query = "INSERT INTO Novo.Livro (title, author, publishedDate, isbn, pages, language, publisher) VALUES (?, ?)" ;
 
         try {
-            const resultado = await executarComandoSQL(query, [name, price]);
-            console.log('Produto inserido com sucesso, ID: ', resultado.insertId);
-            const product = new Product(resultado.insertId,name, price);
-            return new Promise<Product>((resolve)=>{
-                resolve(product);
+            const resultado = await executarComandoSQL(query, [title, author, publishedDate, isbn, pages, language, publisher]);
+            console.log('Livro inserido com sucesso, ID: ', resultado.insertId);
+            const livro = new Livro(resultado.insertId,title, author, publishedDate, isbn, pages, language, publisher);
+            return new Promise<Livro>((resolve)=>{
+                resolve(livro);
             })
         } catch (err) {
-            console.error('Erro ao inserir o produto:', err);
+            console.error('Erro ao inserir o livro:', err);
             throw err;
         }
     }
