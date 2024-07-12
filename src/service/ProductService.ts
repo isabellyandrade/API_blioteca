@@ -17,8 +17,8 @@ export class LivroService{
     }
 
     async atualizarLivro(livroData: any): Promise<Livro> {
-        const { title, author, publishedDate, isbn, pages, language, publisher } = livroData;
-        if(!title || !author || !publishedDate || !isbn || !pages || !language || !publisher ){
+        const { id, title, author, publishedDate, isbn, pages, language, publisher } = livroData;
+        if(!id || !title || !author || !publishedDate || !isbn || !pages || !language || !publisher ){
             throw new Error("Informações incompletas");
         }
 
@@ -27,15 +27,15 @@ export class LivroService{
         return livro;
     }
 
-    async deletarProduto(produtoData: any): Promise<Product> {
-        const { id, name, price } = produtoData;
-        if(!name || !price || !id ){
+    async deletarLivro(livroData: any): Promise<Livro> {
+        const { id, title, author, publishedDate, isbn, pages, language, publisher } = livroData;
+        if(!id || !title || !author || !publishedDate || !isbn || !pages || !language || !publisher ){
             throw new Error("Informações incompletas");
         }
 
-        const produto =  await this.productRepository.deleteProduct(id,name, price);
-        console.log("Service - Delete ", produto);
-        return produto;
+        const livro =  await this.livroRepository.deleteLivro(id,title, author, publishedDate, isbn, pages, language, publisher);
+        console.log("Service - Delete ", livro);
+        return livro;
     }
 
     async filtrarProduto(produtoData: any): Promise<Product> {
