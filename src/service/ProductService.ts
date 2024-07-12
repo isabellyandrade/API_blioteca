@@ -10,6 +10,8 @@ export class LivroService{
         if(!title || !author || !publishedDate || !isbn || !pages || !language || !publisher ){
             throw new Error("Informações incompletas");
         }
+        const cadastro = await this.livroRepository.filterLivroByISBN(isbn);
+        if()
 
         const novoLivro =  await this.livroRepository.insertLivro(title, author, publishedDate, isbn, pages, language, publisher);
         console.log("Service - Insert ", novoLivro);
@@ -38,21 +40,21 @@ export class LivroService{
         return livro;
     }
 
-    async filtrarProduto(produtoData: any): Promise<Product> {
-        if(!produtoData ){
+    async filtrarLivroPorId(livroData: any): Promise<Livro> {
+        if(!livroData ){
             throw new Error("Informações incompletas");
         }
-        const id = parseInt(produtoData, 10);
+        const id = parseInt(livroData, 10);
 
-        const produto =  await this.productRepository.filterProduct(id);
-        console.log("Service - Filtrar", produto);
-        return produto;
+        const livro =  await this.livroRepository.filterLivroById(id);
+        console.log("Service - Filtrar", livro);
+        return livro;
     }
 
-    async listarTodosProdutos(): Promise<Product[]> {
-        const produto =  await this.productRepository.filterAllProduct();
-        console.log("Service - Filtrar Todos", produto);
-        return produto;
+    async listarTodosLivros(): Promise<Livro[]> {
+        const livro =  await this.livroRepository.filterAllLivro();
+        console.log("Service - Filtrar Todos", livro);
+        return livro;
     }
 
 }
