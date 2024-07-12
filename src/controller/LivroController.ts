@@ -59,13 +59,13 @@ export async function filtrarLivroPorId (req: Request, res: Response){
     }
 };
 
-export async function listarTodosProduto (req: Request, res: Response){
+export async function listarTodosLivros (req: Request, res: Response){
     try {
-        const produtos = await productService.listarTodosProdutos();
+        const livros = await livroService.listarTodosLivros();
         res.status(200).json(
             {
-                mensagem:"Produtos listados com sucesso!",
-                produtos:produtos
+                mensagem:"Livros listados com sucesso!",
+                livros:livros
             }
             );
     } catch (error: any) {
