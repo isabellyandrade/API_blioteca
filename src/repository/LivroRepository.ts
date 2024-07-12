@@ -44,18 +44,18 @@ export class LivroRepository{
         }
     }
 
-    async updateProduct(id: number, name: string, price: number) :Promise<Product>{
-        const query = "UPDATE vendas.product set name = ?, price = ? where id = ?;" ;
+    async updateLivro(id: number, title: string, author:string, publishedDate:string, isbn:string, pages: number, language:string, publisher:string) :Promise<Livro>{
+        const query = "UPDATE Novo.Livro set title = ?, author = ?, publishedDate = ?, isbn = ?, pages = ?, language = ?, publisher = ?, where id = ?;" ;
 
         try {
-            const resultado = await executarComandoSQL(query, [name, price, id]);
-            console.log('Produto atualizado com sucesso, ID: ', resultado);
-            const product = new Product(id, name, price);
-            return new Promise<Product>((resolve)=>{
-                resolve(product);
+            const resultado = await executarComandoSQL(query, [title, author, publishedDate, isbn, pages, language, publisher, id]);
+            console.log('Livro atualizado com sucesso, ID: ', resultado);
+            const livro = new Livro(id, title, author, publishedDate, isbn, pages, language, publisher);
+            return new Promise<Livro>((resolve)=>{
+                resolve(livro);
             })
         } catch (err:any) {
-            console.error(`Erro ao atualizar o produto de ID ${id} gerando o erro: ${err}`);
+            console.error(`Erro ao atualizar o livro de ID ${id} gerando o erro: ${err}`);
             throw err;
         }
     }
