@@ -1,19 +1,19 @@
-import { Product } from "../model/Livro";
-import { ProductRepository } from "../repository/LivroRepository";
+import { Livro } from "../model/Livro";
+import { LivroRepository } from "../repository/LivroRepository";
 
-export class ProductService{
+export class LivroService{
 
-    productRepository: ProductRepository = new ProductRepository();
+    livroRepository: LivroRepository = new LivroRepository();
 
-    async cadastrarProduto(produtoData: any): Promise<Product> {
-        const { name, price } = produtoData;
-        if(!name || !price ){
+    async cadastrarLivro(livroData: any): Promise<Livro> {
+        const {title, author, publishedDate, isbn, pages, language, publisher} = livroData;
+        if(!title || !author || !publishedDate || !isbn || !pages || !language || !publisher ){
             throw new Error("Informações incompletas");
         }
 
-        const novoProduto =  await this.productRepository.insertProduct(name, price);
-        console.log("Service - Insert ", novoProduto);
-        return novoProduto;
+        const novoLivro =  await this.livroRepository.insertLivro(title, author, publishedDate, isbn, pages, language, publisher);
+        console.log("Service - Insert ", novoLivro);
+        return novoLivro;
     }
 
     async atualizarProduto(produtoData: any): Promise<Product> {
