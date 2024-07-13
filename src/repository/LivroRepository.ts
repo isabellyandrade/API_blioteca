@@ -9,13 +9,13 @@ export class LivroRepository{
 
     private async createTable() {
         const query = `
-        CREATE TABLE IF NOT EXISTS Novo.Livro (
+        CREATE TABLE IF NOT EXISTS biblioteca.Livro (
             id INT AUTO_INCREMENT PRIMARY KEY,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
             publishedDate VARCHAR(255) NOT NULL,
             isbn VARCHAR(255) NOT NULL,
-            pages INT NOT NULL.
+            pages INT NOT NULL,
             language VARCHAR(255) NOT NULL,
             publisher VARCHAR(255) NOT NULL
         )`;
@@ -29,7 +29,7 @@ export class LivroRepository{
     }
 
     async insertLivro(title: string, author:string, publishedDate:string, isbn:string, pages: number, language:string, publisher:string) :Promise<Livro>{
-        const query = "INSERT INTO Novo.Livro (title, author, publishedDate, isbn, pages, language, publisher) VALUES (?, ?)" ;
+        const query = "INSERT INTO biblioteca.Livro (title, author, publishedDate, isbn, pages, language, publisher) VALUES (?, ?)" ;
 
         try {
             const resultado = await executarComandoSQL(query, [title, author, publishedDate, isbn, pages, language, publisher]);
@@ -45,7 +45,7 @@ export class LivroRepository{
     }
 
     async updateLivro(id: number, title: string, author:string, publishedDate:string, isbn:string, pages: number, language:string, publisher:string) :Promise<Livro>{
-        const query = "UPDATE Novo.Livro set title = ?, author = ?, publishedDate = ?, isbn = ?, pages = ?, language = ?, publisher = ?, where id = ?;" ;
+        const query = "UPDATE biblioteca.Livro set title = ?, author = ?, publishedDate = ?, isbn = ?, pages = ?, language = ?, publisher = ?, where id = ?;" ;
 
         try {
             const resultado = await executarComandoSQL(query, [title, author, publishedDate, isbn, pages, language, publisher, id]);
@@ -61,7 +61,7 @@ export class LivroRepository{
     }
 
     async deleteLivro(id: number, title: string, author:string, publishedDate:string, isbn:string, pages: number, language:string, publisher:string) :Promise<Livro>{
-        const query = "DELETE FROM Novo.Livro where id = ?;" ;
+        const query = "DELETE FROM biblioteca.Livro where id = ?;" ;
 
         try {
             const resultado = await executarComandoSQL(query, [id]);
@@ -77,7 +77,7 @@ export class LivroRepository{
     }
 
     async filterLivroById(id: number) :Promise<Livro>{
-        const query = "SELECT * FROM Novo.Livro where id = ?" ;
+        const query = "SELECT * FROM biblioteca.Livro where id = ?" ;
 
         try {
             const resultado = await executarComandoSQL(query, [id]);
@@ -92,7 +92,7 @@ export class LivroRepository{
     }
 
     async filterLivroByISBN(isbn: number) :Promise<Livro>{
-        const query = "SELECT * FROM Novo.Livro where isbn = ?" ;
+        const query = "SELECT * FROM biblioteca.Livro where isbn = ?" ;
 
         try {
             const resultado = await executarComandoSQL(query, [isbn]);
@@ -106,7 +106,7 @@ export class LivroRepository{
         }
     }
     async filterAllLivro() :Promise<Livro[]>{
-        const query = "SELECT * FROM Novo.Livro" ;
+        const query = "SELECT * FROM biblioteca.Livro" ;
 
         try {
             const resultado = await executarComandoSQL(query, []);
