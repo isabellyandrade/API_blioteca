@@ -10,9 +10,9 @@ export class LivroService{
         if(!title || !author || !publishedDate || !isbn || !pages || !language || !publisher ){
             throw new Error("Informações incompletas");
         }
-        const cadastro = await this.livroRepository.filterLivroByISBN(isbn);
-        if(){
-            
+        const livro = await this.livroRepository.filterLivroByISBN(isbn);
+        if(livro.isbn = isbn){
+            throw new Error("Livro já cadastrado!")
         }
 
         const novoLivro =  await this.livroRepository.insertLivro(title, author, publishedDate, isbn, pages, language, publisher);
