@@ -10,10 +10,10 @@ export class LivroService{
         if(!title || !author || !publishedDate || !isbn || !pages || !language || !publisher ){
             throw new Error("Informações incompletas");
         }
-       //const livro = await this.livroRepository.filterLivroByISBN(isbn);
-       // if(livro.isbn = isbn){
-         //   throw new Error("Livro já cadastrado!")
-        //}
+       const livro = await this.livroRepository.filterLivroByISBN(isbn);
+        if(livro.isbn = isbn){
+            throw new Error("Livro já cadastrado!")
+        }
 
         const novoLivro =  await this.livroRepository.insertLivro(title, author, publishedDate, isbn, pages, language, publisher);
         console.log("Service - Insert ", novoLivro);
@@ -49,6 +49,10 @@ export class LivroService{
         const id = parseInt(livroData, 10);
 
         const livro =  await this.livroRepository.filterLivroById(id);
+        let teste: any = livro;
+        if(livro.isbn == ''){
+            throw new Error("Livro não encontrado!")
+        }
         console.log("Service - Filtrar", livro);
         return livro;
     }

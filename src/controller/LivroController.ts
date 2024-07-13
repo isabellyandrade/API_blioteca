@@ -13,7 +13,7 @@ export async function cadastrarLivro (req: Request, res: Response){
             }
         );
     } catch (error: any) {
-        res.status(400).json({ message: error.message});
+        res.status(409).json({ message: error.message});
     }
 };
 
@@ -55,7 +55,7 @@ export async function filtrarLivroPorId (req: Request, res: Response){
             }
         );
     } catch (error: any) {
-        res.status(400).json({ message: error.message});
+        res.status(404).json({ message: error.message});
     }
 };
 

@@ -3,7 +3,7 @@ import { cadastrarLivro, atualizarLivro , deletarLivro, filtrarLivroPorId, lista
 
 const app = express();
 
-const PORT = 3200;
+const PORT = 3300;
 
 app.use(express.json());
 

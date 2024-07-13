@@ -45,7 +45,7 @@ export class LivroRepository{
     }
 
     async updateLivro(id: number, title: string, author:string, publishedDate:string, isbn:string, pages: number, language:string, publisher:string) :Promise<Livro>{
-        const query = "UPDATE biblioteca.Livro set title = ?, author = ?, publishedDate = ?, isbn = ?, pages = ?, language = ?, publisher = ?, where id = ?;" ;
+        const query = "UPDATE biblioteca.Livro set title = ?, author = ?, publishedDate = ?, isbn = ?, pages = ?, language = ?, publisher = ? where id = ?;" ;
 
         try {
             const resultado = await executarComandoSQL(query, [title, author, publishedDate, isbn, pages, language, publisher, id]);
@@ -80,7 +80,7 @@ export class LivroRepository{
         const query = "SELECT * FROM biblioteca.Livro where id = ?" ;
 
         try {
-            const resultado = await executarComandoSQL(query, [id]);
+            const resultado: Livro = await executarComandoSQL(query, [id]);
             console.log('Livro localizado com sucesso, ID: ', resultado);
             return new Promise<Livro>((resolve)=>{
                 resolve(resultado);
